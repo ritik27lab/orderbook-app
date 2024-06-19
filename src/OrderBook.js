@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, Text, ScrollView, StyleSheet, SafeAreaView } from "react-native";
 import { Centrifuge } from "centrifuge";
 import OrderBookTable from "./components/OrderBookTable";
+import Constants from 'expo-constants'; // Import expo-constants
+
+
 
 const OrderBook = () => {
   const [bids, setBids] = useState([]);
@@ -20,10 +23,12 @@ const OrderBook = () => {
     };
   }, []);
 
+  
+
   const connectWebSocket = () => {
     const centrifuge = new Centrifuge("wss://api.prod.rabbitx.io/ws", {
       token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MDAwMDAwMDAwIiwiZXhwIjo2NTQ4NDg3NTY5fQ.o_qBZltZdDHBH3zHPQkcRhVBQCtejIuyq8V1yj5kYq8",
+        Constants.expoConfig.extra.PROD_RABBITX_KEY
     });
 
     centrifuge.on("connect", () => {
